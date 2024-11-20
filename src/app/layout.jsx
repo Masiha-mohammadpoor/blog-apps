@@ -1,4 +1,6 @@
-import "../styles/globals.css";
+import "@/styles/globals.css";
+import vazirFont from "@/constants/localFont";
+import Header from "@/components/Header";
 
 export const metadata = {
   title: "Create Next App",
@@ -8,8 +10,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
-      <body>
-        {children}
+      <body className={`${vazirFont.variable} font-sans min-h-screen`}>
+        <Header />
+        <main>{children}</main>
       </body>
     </html>
   );
