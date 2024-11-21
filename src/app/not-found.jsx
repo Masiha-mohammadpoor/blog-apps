@@ -9,7 +9,7 @@ const NotFound = () => {
       <Image src="/images/404.svg" width={300} height={100} alt="404" />
       <h1 className="font-semibold text-xl">صفحه مورد نظر پیدا نشد!</h1>
       <button onClick={() => router.back()} className="btn btn--primary">
-        برگشت به صفحه اصلی
+        برگشت به صفحه قبل
       </button>
     </section>
   );
