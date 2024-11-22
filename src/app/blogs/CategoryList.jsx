@@ -5,7 +5,6 @@ import { Suspense } from "react";
 
 const CategoryList = async () => {
 
-  await new Promise(res => setTimeout(res,2000))
   const {
     data: { data },
   } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/category/list`);
