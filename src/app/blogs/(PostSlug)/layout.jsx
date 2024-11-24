@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import CategoryList from "./CategoryList";
+import CategoryList from "../CategoryList";
 import Spinner from "@/ui/Spinner";
 
 export default function Layout({ children }) {

@@ -1,8 +1,6 @@
 import Avatar from "@/components/Avatar";
 import CoverImage from "@/components/CoverImage";
-import { FaRegHeart } from "react-icons/fa";
 import axios from "axios";
-import Image from "next/image";
 import Link from "next/link";
 import PostInteraction from "./PostInteraction";
 
@@ -21,7 +19,7 @@ const PostList = async () => {
           >
             <CoverImage {...p}/>
             <div className="my-2 px-4">
-              <p className="text-sm font-semibold">{p.title}</p>
+              <Link href={`blogs/${p.slug}`}><p className="text-sm font-semibold">{p.title}</p></Link>
             </div>
             <div className="px-4 my-2">
               <div className="flex justify-between items-center">
