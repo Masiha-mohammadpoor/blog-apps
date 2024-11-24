@@ -1,8 +1,10 @@
 import Avatar from "@/components/Avatar";
 import CoverImage from "@/components/CoverImage";
+import { FaRegHeart } from "react-icons/fa";
 import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
+import PostInteraction from "./PostInteraction";
 
 const PostList = async () => {
   const {
@@ -18,7 +20,10 @@ const PostList = async () => {
             key={p._id}
           >
             <CoverImage {...p}/>
-            <div className="p-4">
+            <div className="my-2 px-4">
+              <p className="text-sm font-semibold">{p.title}</p>
+            </div>
+            <div className="px-4 my-2">
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-x-2">
                   <Avatar src={p.author.avatarUrl} alt={p.author.name}/>
@@ -28,6 +33,9 @@ const PostList = async () => {
                   <p className="text-xs text-secondary-500">خواندن : {p.readingTime} دقیقه</p>
                 </div>
               </div>
+            </div>
+            <div className="my-4 px-4">
+              <PostInteraction {...p}/>
             </div>
           </article>
         );
