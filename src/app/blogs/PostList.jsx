@@ -3,15 +3,15 @@ import CoverImage from "@/components/CoverImage";
 import axios from "axios";
 import Link from "next/link";
 import PostInteraction from "./PostInteraction";
+import { getAllPosts } from "@/services/postServices";
 
 const PostList = async () => {
-  const {
-    data: { data },
-  } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/post/list`);
+
+  const {posts} = await getAllPosts();
 
   return (
     <>
-      {data.posts.map((p) => {
+      {posts.map((p) => {
         return (
           <article
             className="bg-secondary-200 col-span-4 rounded-md"
