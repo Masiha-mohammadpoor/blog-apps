@@ -1,16 +1,24 @@
-import { getSinglePost } from "@/services/postServices";
+import { getAllPosts, getSinglePost } from "@/services/postServices";
 import Image from "next/image";
 
 export async function generateMetadata({ params }) {
-  const { post } = await getSinglePost(params.postSlug);
+  const { post } = await getSinglePost(params.slug);
 
   return {
     title: post.title,
   };
 }
 
+export async function generateStaticParams() {
+  const {posts} = await getAllPosts()
+ 
+  return posts.slice(0,10).map((post) => ({
+    slug: post.slug,
+  }))
+}
+
 const SinglePostPage = async ({ params }) => {
-  const { post } = await getSinglePost(params.postSlug);
+  const { post } = await getSinglePost(params.slug);
 
   return (
     <div className="container mt-10 px-40">
