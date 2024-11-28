@@ -1,7 +1,8 @@
 "use client";
 
-import { signinUser, signupUser } from "@/services/authServices";
-import { createContext, useContext, useReducer } from "react";
+import { getUserApi, signinUser, signupUser } from "@/services/authServices";
+import { useRouter } from "next/navigation";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext();
@@ -37,10 +38,18 @@ const authReducer = (state, action) => {
         isAuthenticated: true,
         isLoading: false,
       };
+    case "user/loaded":
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated: true,
+        isLoading: false,
+      };
   }
 };
 
 const AuthProvider = ({ children }) => {
+  const router = useRouter();
   const [{ user, isAuthenticated, isLoading }, dispatch] = useReducer(
     authReducer,
     initialState
@@ -52,6 +61,7 @@ const AuthProvider = ({ children }) => {
       const { message, user } = await signinUser(values);
       dispatch({ type: "signin", payload: user });
       toast.success(message);
+      router.push("/profile");
     } catch (err) {
       const error = err?.response?.data?.message;
       dispatch({ type: "rejected", payload: error });
@@ -64,12 +74,39 @@ const AuthProvider = ({ children }) => {
       const { user, message } = await signupUser(values);
       dispatch({ type: "signup", payload: user });
       toast.success(message);
+      router.push("/profile");
     } catch (err) {
       const error = err?.response?.data?.message;
       dispatch({ type: "rejected", payload: error });
       toast.error(error);
     }
   };
+  const getUser = async () => {
+    dispatch({ type: "loading" });
+    try {
+      const { user } = await getUserApi();
+      dispatch({ type: "user/loaded", payload: user });
+    } catch (err) {
+      const error = err?.response?.data?.message;
+      dispatch({ type: "rejected", payload: error });
+      toast.error(error);
+    }
+  };
+
+  useEffect(() => {
+    const getUser = async () => {
+      dispatch({ type: "loading" });
+      try {
+        const { user } = await getUserApi();
+        dispatch({ type: "user/loaded", payload: user });
+      } catch (err) {
+        const error = err?.response?.data?.message;
+        dispatch({ type: "rejected", payload: error });
+        console.log(error)
+      }
+    };
+    getUser();
+  },[])
 
   return (
     <AuthContext.Provider

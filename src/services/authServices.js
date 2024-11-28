@@ -8,3 +8,6 @@ export const signinUser = (value) => {
   return http.post("/user/signin" , value).then(({ data }) => data.data);
 };
 
+export const getUserApi = () => {
+  return http.get("/user/profile").then(({ data }) => data.data);
+};
