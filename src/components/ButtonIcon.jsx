@@ -1,6 +1,6 @@
 const btnType = {
   primary:
-    "bg-primary-300 text-primary-600 hover:bg-primary-600 hover:text-white",
+    "bg-primary-300 text-primary-800 hover:bg-primary-800 hover:text-white",
   secondary:
     "bg-secondary-300 text-secondary-600 hover:bg-secondary-600 hover:text-white",
   error: "bg-red-200 text-red-600 hover:bg-red-600 hover:text-white",

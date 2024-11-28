@@ -18,7 +18,7 @@ const Header = () => {
         </ul>
       </div>
       <div>
-        <Link href="/auth">ورود</Link>
+        <Link href="/signin">ورود</Link>
       </div>
     </header>
   );
