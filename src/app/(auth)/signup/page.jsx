@@ -1,37 +1,32 @@
 "use client";
 import { useForm } from "react-hook-form";
 import RHFTextField from "@/ui/RHFTextField";
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { signupUser } from "@/services/authServices";
-import toast from "react-hot-toast";
+import { useAuth } from "@/context/authContext";
 
-export const metaData = {
-  title: "ثبت نام",
-};
-
-const schema = yup.object({
-  name: yup.string().required("نام و نام‌خانوادگی الزامی است"),
-  email : yup.string().email("ایمیل نامعتبر است").required("ایمیل الزامی است"),
-  password : yup.string().required("رمز عبور الزامی است")
-
-}).required();
-
+const schema = yup
+  .object({
+    name: yup.string().required("نام و نام‌خانوادگی الزامی است"),
+    email: yup.string().email("ایمیل نامعتبر است").required("ایمیل الزامی است"),
+    password: yup.string().required("رمز عبور الزامی است"),
+  })
+  .required();
 
 const Signup = () => {
-  const { register, handleSubmit, formState:{ errors } } = useForm({
+  const { signup } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     resolver: yupResolver(schema),
-    mode:"onTouched"
+    mode: "onTouched",
   });
 
   const onSubmit = async (values) => {
-    try{
-      const {message} = await signupUser(values);
-      toast.success(message)
-    }catch(err){
-      toast.error(err?.response?.data?.message);
-    }
-  }
+    await signup(values);
+  };
   return (
     <section className="w-96 mx-auto mt-10">
       <h1 className="font-semibold text-3xl mb-5 text-primary-600">ثبت نام</h1>
