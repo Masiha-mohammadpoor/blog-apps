@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import RHFTextField from "@/ui/RHFTextField";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
+import { signupUser } from "@/services/authServices";
+import toast from "react-hot-toast";
 
 export const metaData = {
   title: "ثبت نام",
@@ -22,8 +24,13 @@ const Signup = () => {
     mode:"onTouched"
   });
 
-  const onSubmit = (values) => {
-    console.log(values)
+  const onSubmit = async (values) => {
+    try{
+      const {message} = await signupUser(values);
+      toast.success(message)
+    }catch(err){
+      toast.error(err?.response?.data?.message);
+    }
   }
   return (
     <section className="w-96 mx-auto mt-10">
@@ -50,7 +57,7 @@ const Signup = () => {
           dir="ltr"
           errors={errors}
         />
-        <button className="w-full btn btn--primary mt-5">تایید</button>
+        <button className="w-full btn btn--primary mt-5">ثبت نام</button>
       </form>
     </section>
   );
