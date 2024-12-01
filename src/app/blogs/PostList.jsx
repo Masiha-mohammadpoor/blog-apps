@@ -7,11 +7,11 @@ import { getAllPosts } from "@/services/postServices";
 import { cookies } from "next/headers";
 import { toStringCookies } from "@/utils/toStringCookies";
 
-const PostList = async () => {
+const PostList = async ({query}) => {
 
   const cookieStore = cookies();
   const strCookies = toStringCookies(cookieStore);
-  const {posts} = await getAllPosts(strCookies);
+  const {posts} = await getAllPosts(query , strCookies);
 
   return (
     <>
