@@ -18,3 +18,7 @@ export const likePost = (id) => {
   return http.post(`/post/like/${id}`).then(({ data }) => data.data);
 };
 
+
+export const bookmarkPost = (id) => {
+  return http.post(`/post/bookmark/${id}`).then(({ data }) => data.data);
+};
