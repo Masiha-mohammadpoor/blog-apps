@@ -4,10 +4,14 @@ import axios from "axios";
 import Link from "next/link";
 import PostInteraction from "./PostInteraction";
 import { getAllPosts } from "@/services/postServices";
+import { cookies } from "next/headers";
+import { toStringCookies } from "@/utils/toStringCookies";
 
 const PostList = async () => {
 
-  const {posts} = await getAllPosts();
+  const cookieStore = cookies();
+  const strCookies = toStringCookies(cookieStore);
+  const {posts} = await getAllPosts(strCookies);
 
   return (
     <>
