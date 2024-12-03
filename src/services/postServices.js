@@ -1,7 +1,7 @@
 import http from "./httpService";
 
 
-export const getAllPosts = (query , cookies) => {
+export const getAllPosts = (query="" , cookies) => {
   return http.get(`/post/list?${query}` , {
     headers : {
       Cookie: cookies

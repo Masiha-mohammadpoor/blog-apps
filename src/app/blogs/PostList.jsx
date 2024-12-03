@@ -6,15 +6,18 @@ import PostInteraction from "./PostInteraction";
 import { getAllPosts } from "@/services/postServices";
 import { cookies } from "next/headers";
 import { toStringCookies } from "@/utils/toStringCookies";
+import { toPersianDigits } from "@/utils/toPersianDigits";
 
 const PostList = async ({query}) => {
 
   const cookieStore = cookies();
   const strCookies = toStringCookies(cookieStore);
-  const {posts} = await getAllPosts(query , strCookies);
+  const {posts} = await getAllPosts(`${query}` , strCookies);
 
+  if(posts.length <= 0) return <p className="col-span-12 flex justify-center">پستی با این مشخصات وجود ندارد</p>
   return (
     <>
+    <p className="col-span-12">{toPersianDigits(posts.length)} نتیجه برای نشان دادن</p>
       {posts.map((p) => {
         return (
           <article

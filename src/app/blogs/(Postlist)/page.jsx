@@ -1,12 +1,14 @@
 import Spinner from "@/ui/Spinner";
-import axios from "axios";
 import { Suspense } from "react";
 import PostList from "../PostList";
+import queryString from "query-string";
 
-const BlogsPage = () => {
+const BlogsPage = ({searchParams}) => {
+
+  const queries = `${queryString.stringify(searchParams)}`;
   return (
     <Suspense fallback={<Spinner />}>
-      <PostList />
+      <PostList query={queries}/>
     </Suspense>
   );
 };
