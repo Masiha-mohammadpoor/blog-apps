@@ -1,3 +1,4 @@
+import PostComment from "@/components/comments/CommentSection";
 import RelatedPost from "@/components/RelatedPost";
 import { getAllPosts, getSinglePost } from "@/services/postServices";
 import Image from "next/image";
@@ -42,6 +43,7 @@ const SinglePostPage = async ({ params }) => {
           })}
         </div>
       )}
+      <PostComment post={post}/>
     </div>
   );
 };

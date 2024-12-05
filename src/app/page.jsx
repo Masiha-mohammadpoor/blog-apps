@@ -7,7 +7,7 @@ export default function Home() {
       <p className="text-center leading-7">
         جایی که قراره بتونی یه اپلیکیشن بلاگ کامل رو مدیریت کنی!
         <br />
-        بتونی بلاگ بسازی - کامنت بذاری و در پنلت همه اتفاقات رو رصد منی!
+        بتونی بلاگ بسازی - کامنت بذاری و در پنلت همه اتفاقات رو رصد کنی!
       </p>
       <div className="flex gap-x-5">
         <Link href="/blogs">
