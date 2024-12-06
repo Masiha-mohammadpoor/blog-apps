@@ -28,7 +28,7 @@ const CommentSection = ({ post: { comments, _id } }) => {
   return (
     <section>
       <h1 className="text-lg font-semibold mt-5 mb-3">نظرات</h1>
-      <CommentForm />
+      <CommentForm postId={_id}/>
       <div className="space-y-8 post-comments bg-secondary-0 rounded-xl py-6 px-3 lg:px-6 mt-5">
         {comments.length > 0 ? (
           comments.map((comment) => {

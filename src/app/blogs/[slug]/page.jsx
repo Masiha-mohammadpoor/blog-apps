@@ -4,7 +4,8 @@ import { getAllPosts, getSinglePost } from "@/services/postServices";
 import Image from "next/image";
 
 export async function generateMetadata({ params }) {
-  const { post } = await getSinglePost(params.slug);
+  const {slug} = await params;
+  const { post } = await getSinglePost(slug);
 
   return {
     title: post.title,
@@ -20,7 +21,9 @@ export async function generateStaticParams() {
 }
 
 const SinglePostPage = async ({ params }) => {
-  const { post } = await getSinglePost(params.slug);
+
+  const {slug} = await params;
+  const { post } = await getSinglePost(slug);
 
   return (
     <div className="container mt-10 px-40">
