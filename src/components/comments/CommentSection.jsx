@@ -1,7 +1,30 @@
+"use client";
+import { useAuth } from "@/context/authContext";
 import Comment from "./Comment";
 import CommentForm from "./CommentForm";
+import { useRouter } from "next/navigation";
+import swal from "sweetalert";
+import { useState } from "react";
 
 const CommentSection = ({ post: { comments, _id } }) => {
+  const { user } = useAuth();
+  const router = useRouter();
+
+  const addNewCommentHandler = (comment) => {
+    if (!user) {
+      router.push("/signin");
+    } else {
+      swal(`پاسخ به نظر ${comment.user.name}`, {
+        content: "input",
+      }).then((value) => {
+        if (!value) {
+          swal("", "لطفا چیزی وارد کنید", "error");
+        } else {
+          swal("" , "پاسخ شما ثبت شد" , "success")
+        }
+      });
+    }
+  };
   return (
     <section>
       <h1 className="text-lg font-semibold mt-5 mb-3">نظرات</h1>
