@@ -1,6 +1,7 @@
 "use client";
 
 import { createComment } from "@/lib/actions";
+import SpinnerButton from "@/ui/SpinnerButton";
 import { useState } from "react";
 
 const CommentForm = ({ postId }) => {
@@ -22,7 +23,7 @@ const CommentForm = ({ postId }) => {
           placeholder="نظر خود را بنویسید..."
           className="resize-none w-full bg-secondary-200 shadow-xl rounded-md p-4 h-32"
         ></textarea>
-        <button className="btn btn--primary mt-4">ثبت نظر</button>
+        <SpinnerButton />
       </form>
     </div>
   );
