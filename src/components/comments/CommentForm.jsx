@@ -2,17 +2,34 @@
 
 import { createComment } from "@/lib/actions";
 import SpinnerButton from "@/ui/SpinnerButton";
-import { useState } from "react";
+import { useActionState, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+
+const initialState = {
+  error: "",
+  message: "",
+};
 
 const CommentForm = ({ postId }) => {
   const [text, setText] = useState("");
+  const [state, formAction] = useActionState(createComment, initialState);
 
-  const createCommentData = createComment.bind(null, postId);
+  useEffect(() => {
+    if (state?.message) {
+      toast.success(state.message);
+    }
+    if (state?.error) {
+      toast.error(state.error);
+    }
+  }, [state]);
+
 
   return (
     <div>
       <form
-        action={createCommentData}
+        action={(formData) => {
+         formAction({ formData, postId });
+        }}
         className="flex flex-col justify-start items-start"
         onSubmit={() => setText("")}
       >
