@@ -1,4 +1,4 @@
-import PostList from "@/app/blogs/PostList";
+import PostList from "../../../PostList";
 import queryString from "query-string";
 
 const Category = async ({params , searchParams}) => {

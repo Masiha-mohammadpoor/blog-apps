@@ -1,6 +1,8 @@
 const Profile = () => {
   return (
-    <div>profile</div>
+    <div>
+      profile
+    </div>
   );
 }
  
