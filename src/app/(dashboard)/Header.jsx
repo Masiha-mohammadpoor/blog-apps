@@ -3,10 +3,13 @@ import Avatar from "@/components/Avatar";
 import ButtonIcon from "@/components/ButtonIcon";
 import { useAuth } from "@/context/authContext";
 import Link from "next/link";
-
+import { useState } from "react";
+import { HiBars4, HiMiniXMark } from "react-icons/hi2";
+import SideBar from "./SideBar";
+import Drawer from "@/ui/Drawer";
 
 function Header({}) {
-  // const [isOpenDrawer, setIsOpenDrawer] = useState(false);
+  const [isOpenDrawer, setIsOpenDrawer] = useState(false);
   const { user, isLoading } = useAuth();
   return (
     <header
@@ -14,6 +17,16 @@ function Header({}) {
     >
       <div className="flex items-center justify-between py-5 px-4 lg:px-8">
         <div className="flex items-center gap-x-3">
+          <button
+            className="block lg:hidden border-none"
+            onClick={() => setIsOpenDrawer(!isOpenDrawer)}
+          >
+            {isOpenDrawer ? (
+              <HiMiniXMark className="w-6 h-6" />
+            ) : (
+              <HiBars4 className="w-6 h-6" />
+            )}
+          </button>
           <div className="flex flex-col lg:flex-row justify-start lg:items-center gap-x-2">
             <span className="text-sm lg:text-lg font-bold text-secondary-700">
               سلام؛ {user?.name}
@@ -22,13 +35,11 @@ function Header({}) {
         </div>
         <div className="flex items-center gap-x-3">
           <Link href="/profile">
-            <ButtonIcon
-              color="outline"
-              className={`border-secondaray-200 rounded-2xl flex cursor-pointer items-center`}
-            >
-              <Avatar src={user?.avatarUrl} />
-            </ButtonIcon>
+            <Avatar src={user?.avatarUrl} />
           </Link>
+          <Drawer open={isOpenDrawer} onClose={() => setIsOpenDrawer(false)}>
+            <SideBar onClose={() => setIsOpenDrawer(false)} />
+          </Drawer>
         </div>
       </div>
     </header>

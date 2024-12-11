@@ -1,11 +1,10 @@
-// import {
-//   ChatBubbleBottomCenterIcon,
-//   DocumentTextIcon,
-//   RectangleGroupIcon,
-//   Squares2X2Icon,
-//   UsersIcon,
-// } from "@heroicons/react/24/outline";
-// import classNames from "classnames";
+import {
+  HiOutlineDocumentText,
+  HiOutlineRectangleGroup,
+  HiOutlineChatBubbleBottomCenter,
+  HiOutlineSquares2X2,
+  HiOutlineUsers,
+} from "react-icons/hi2";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -13,32 +12,32 @@ const sidebarNavs = [
   {
     id: 1,
     title: "داشبورد",
-    // icon: <RectangleGroupIcon className="w-5 h-5" />,
+    icon: <HiOutlineRectangleGroup className="w-5 h-5" />,
     href: "/profile",
   },
 
   {
     id: 2,
     title: "پست ها",
-    // icon: <DocumentTextIcon className="w-5 h-5" />,
+    icon: <HiOutlineDocumentText className="w-5 h-5" />,
     href: "/profile/posts",
   },
   {
     id: 3,
     title: "نظرات",
-    // icon: <ChatBubbleBottomCenterIcon className="w-5 h-5" />,
+    icon: <HiOutlineChatBubbleBottomCenter className="w-5 h-5" />,
     href: "/profile/comments",
   },
   {
     id: 4,
     title: "دسته بندی ها",
-    // icon: <Squares2X2Icon className="w-5 h-5" />,
+    icon: <HiOutlineSquares2X2 className="w-5 h-5" />,
     href: "/profile/categories",
   },
   {
     id: 5,
     title: "کاربران",
-    // icon: <UsersIcon className="w-5 h-5" />,
+    icon: <HiOutlineUsers className="w-5 h-5" />,
     href: "/profile/users",
   },
 ];
@@ -57,7 +56,7 @@ export default function SideBarNavs() {
                 "bg-primary-100/40 !font-bold text-primary-900"
               }`}
             >
-             {nav.icon}
+              {nav.icon}
               {nav.title}
             </Link>
           </li>
