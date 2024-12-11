@@ -8,3 +8,13 @@ export const addComment = (data, cookies) => {
     })
     .then(({ data }) => data.data);
 };
+
+
+export const getAllComments = (cookies) => {
+  return http.get("/comment/list", {
+      headers: {
+        Cookie: cookies,
+      },
+    })
+    .then(({ data }) => data.data);
+};

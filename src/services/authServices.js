@@ -11,3 +11,12 @@ export const signinUser = (value) => {
 export const getUserApi = () => {
   return http.get("/user/profile").then(({ data }) => data.data);
 };
+
+export const getAllUsers = (cookies) => {
+  return http.get("/user/list", {
+      headers: {
+        Cookie: cookies,
+      },
+    })
+    .then(({ data }) => data.data);
+};
