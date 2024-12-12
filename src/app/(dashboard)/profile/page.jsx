@@ -1,15 +1,20 @@
-import { fetchCardData } from "@/services/data";
-import { Card } from "@/ui/Card";
+import PostTable from "./posts/PostTable";
+import { Suspense } from "react";
+import CardsWrapper from "./CardsWrapper";
+import Spinner from "@/ui/Spinner";
 
 const Profile = async () => {
-  const { numOfComments, numOfPosts, numOfUsers } = await fetchCardData();
   return (
     <div>
-      <div className="grid gap-6 md:grid-cols-3 mb-8">
-        <Card title="کاربران" value={numOfUsers} type="users" />
-        <Card title="پست ها" value={numOfPosts} type="posts" />
-        <Card title="نظرات" value={numOfComments} type="comments" />
-      </div>
+      <h1 className="text-lg font-semibold">آمار‌ها</h1>
+      <Suspense fallback={<Spinner />}>
+        <CardsWrapper />
+      </Suspense>
+
+      <h1 className="text-lg font-semibold">آخرین پست‌ها</h1>
+      <Suspense fallback={<Spinner />}>
+        <PostTable query="sort=latest&limit=5" />
+      </Suspense>
     </div>
   );
 };
