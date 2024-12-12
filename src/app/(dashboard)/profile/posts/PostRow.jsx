@@ -2,6 +2,7 @@ import Table from "@/ui/Table";
 import toLocalDate from "@/utils/toLocalDate";
 import { toPersianDigits } from "@/utils/toPersianDigits";
 import truncateText from "@/utils/truncateText";
+import { DeletePost, EditPost } from "./Buttons";
 
 const typeStyle = {
   free: {
@@ -15,7 +16,7 @@ const typeStyle = {
 };
 
 const PostRow = ({ post, index }) => {
-  const { title, category, author, createdAt, type } = post;
+  const { title, category, author, createdAt, type , _id} = post;
   return (
     <Table.Row>
       <td>{toPersianDigits(index + 1)}</td>
@@ -28,7 +29,12 @@ const PostRow = ({ post, index }) => {
           {typeStyle[type].label}
         </span>
       </td>
-      <td>actions</td>
+      <td>
+        <span className="flex gap-x-2">
+        <DeletePost id={_id}/>
+        <EditPost id={_id}/>
+        </span>
+      </td>
     </Table.Row>
   );
 };
