@@ -3,6 +3,7 @@ import vazirFont from "@/constants/localFont";
 import Header from "@/components/Header";
 import { Toaster } from "react-hot-toast";
 import AuthProvider from "@/context/authContext";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
 
 export const metadata = {
   title: "Create Next App",
@@ -13,10 +14,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
       <body className={`${vazirFont.variable} font-sans min-h-screen`}>
-        <AuthProvider>
-          <Toaster />
-          <div>{children}</div>
-        </AuthProvider>
+        <ReactQueryProvider>
+          <AuthProvider>
+            <Toaster />
+            <div>{children}</div>
+          </AuthProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

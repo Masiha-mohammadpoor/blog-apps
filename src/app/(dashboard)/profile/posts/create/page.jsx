@@ -1,4 +1,5 @@
 import Breadcrumbs from "@/ui/BreadCrumbs";
+import CreatePostForm from "./_/CreatePostForm";
 
 const CreatePost = () => {
   return (
@@ -9,6 +10,7 @@ const CreatePost = () => {
           { label: "ایجاد پست", href: "/profile/posts/create" },
         ]}
       />
+      <CreatePostForm/>
     </div>
   );
 };
