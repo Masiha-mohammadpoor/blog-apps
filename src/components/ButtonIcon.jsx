@@ -6,11 +6,11 @@ const btnType = {
   error: "bg-red-200 text-red-600 hover:bg-red-600 hover:text-white",
 };
 
-const ButtonIcon = ({ children, variant, onClick , ...rest}) => {
+const ButtonIcon = ({ children, variant, onClick , className , ...rest}) => {
   return (
     <button
       onClick={onClick}
-      className={`${btnType[variant]} h-8 px-2 rounded-md flex justify-center items-center gap-x-2 transition-all duration-300`}
+      className={`${btnType[variant]} ${className} h-8 px-2 rounded-md flex justify-center items-center gap-x-2 transition-all duration-300`}
       {...rest}
     >
       {children}

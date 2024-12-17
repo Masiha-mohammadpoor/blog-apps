@@ -53,5 +53,12 @@ module.exports = {
         sans: ["var(--font-vazir)", ...fontFamily.sans],
       },
     },
-  }
+  },
+  corePlugins: {
+    aspectRatio: false,
+  },
+  plugins: [
+    require('@tailwindcss/aspect-ratio'),
+    // ...
+  ],
 };
