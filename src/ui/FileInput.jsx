@@ -19,7 +19,7 @@ function FileInput({
         required
         type="file"
         id="file-upload"
-        className="hidden"
+        className="w-0"
         name={name}
         dir={dir}
         value={value}

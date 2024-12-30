@@ -30,7 +30,7 @@ const SinglePostPage = async ({ params }) => {
       <h1 className="text-lg font-semibold mb-5">{post.title}</h1>
       <p className="text-secondary-600 mb-5">{post.briefText}</p>
       <p className="text-secondary-600 mb-10">{post.text}</p>
-      <div className="relative aspect-video overflow-hidden">
+      <div className="relative aspect-w-16 aspect-h-9 overflow-hidden">
         <Image
           src={post.coverImageUrl}
           fill

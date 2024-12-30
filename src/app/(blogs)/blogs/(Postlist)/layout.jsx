@@ -12,7 +12,8 @@ export default function Layout({ children }) {
         </Suspense>
       </section>
       <section className="col-span-9 grid grid-cols-12 gap-8">
-        <div className="col-span-12">        <Search/>
+        <div className="col-span-12">
+          <Search />
         </div>
         {children}
       </section>

@@ -11,12 +11,39 @@ import { HiMiniXMark } from "react-icons/hi2";
 import { useState } from "react";
 import TextField from "@/ui/TextField";
 import FileInput from "@/ui/FileInput";
+import Button from "@/ui/Button";
+import { useRouter } from "next/navigation";
+import useCreatePost from "@/hooks/useCreatePost";
 
-const schema = yup.object();
+const schema = yup
+  .object({
+    title: yup
+      .string()
+      .min(5, "حداقل ۵ کاراکتر را وارد کنید")
+      .required("عنوان ضروری است"),
+    briefText: yup
+      .string()
+      .min(5, "حداقل ۱۰ کاراکتر را وارد کنید")
+      .required("توضیحات ضروری است"),
+    text: yup
+      .string()
+      .min(5, "حداقل ۱۰ کاراکتر را وارد کنید")
+      .required("توضیحات ضروری است"),
+    slug: yup.string().required("اسلاگ ضروری است"),
+    readingTime: yup
+      .number()
+      .positive()
+      .integer()
+      .required("زمان مطالعه ضروری است")
+      .typeError("یک عدد را وارد کنید"),
+    category: yup.string().required("دسته بندی ضروری است"),
+  })
+  .required();
 
 const CreatePostForm = () => {
+  const {createPost} = useCreatePost();
+  const router = useRouter();
   const [coverImageUrl, setCoverImageUrl] = useState(null);
-  console.log(coverImageUrl);
   const { categories } = useCategories();
   const {
     register,
@@ -24,11 +51,28 @@ const CreatePostForm = () => {
     setValue,
     handleSubmit,
     reset,
-    control,
+    control
   } = useForm({
     mode: "onTouched",
     resolver: yupResolver(schema),
   });
+
+
+  const onSubmit = async (data) => {
+    const formData = new FormData();
+
+    for(const key in data) {
+      formData.append(key , data[key]);
+    }
+
+    createPost(formData , {
+      onSuccess:() => {
+        router.push("/profile/posts")
+      }
+    })
+  }
+
+
   return (
     <form className="form">
       <RHFTextField
@@ -72,6 +116,7 @@ const CreatePostForm = () => {
         register={register}
         required
         options={categories}
+        errors={errors}
       />
       <Controller
         control={control}
@@ -81,7 +126,7 @@ const CreatePostForm = () => {
           return (
             <FileInput
               label="انتخاب کاور پست"
-              name="my-coverImage"
+              name="coverImage"
               {...rest}
               value={value?.fileName}
               onChange={(event) => {
@@ -105,7 +150,6 @@ const CreatePostForm = () => {
             unoptimized
           />
           <ButtonIcon
-            type="button"
             onClick={() => {
               setCoverImageUrl(null);
               setValue("coverImage", null);
@@ -117,8 +161,10 @@ const CreatePostForm = () => {
           </ButtonIcon>
         </div>
       )}
+
+      <button type="submit" onClick={handleSubmit(onSubmit)}>تایید</button>
     </form>
   );
 };
 
-export default CreatePostForm;
+export default  CreatePostForm;

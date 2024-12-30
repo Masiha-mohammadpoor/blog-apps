@@ -10,10 +10,12 @@ function Button({
   onClick,
   variant = "primary",
   className,
+  type="button",
   ...rest
 }) {
   return (
     <button
+    type={type}
       onClick={onClick}
       className={`btn ${btnType[variant]} ${className}`}
       {...rest}

@@ -23,3 +23,7 @@ export const likePost = (id) => {
 export const bookmarkPost = (id) => {
   return http.post(`/post/bookmark/${id}`).then(({ data }) => data.data);
 };
+
+export const createPostApi = (data) => {
+  return http.post(`/post/create` , data).then(({ data }) => data.data);
+};
