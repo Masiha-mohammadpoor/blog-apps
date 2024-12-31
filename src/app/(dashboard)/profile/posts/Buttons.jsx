@@ -25,7 +25,7 @@ export const DeletePost = ({id}) => {
  
 export const EditPost = ({id}) => {
   return (
-    <Link href={`profile/posts/${id}/edit`}>
+    <Link href={`/profile/posts/${id}/edit`}>
     <ButtonIcon variant="primary">
       <HiOutlinePencilSquare/>
     </ButtonIcon>

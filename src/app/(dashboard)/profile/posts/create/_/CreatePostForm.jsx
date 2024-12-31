@@ -8,12 +8,12 @@ import Image from "next/image";
 import { Controller, useForm } from "react-hook-form";
 import * as yup from "yup";
 import { HiMiniXMark } from "react-icons/hi2";
-import { useState } from "react";
-import TextField from "@/ui/TextField";
+import { useEffect, useState } from "react";
 import FileInput from "@/ui/FileInput";
-import Button from "@/ui/Button";
 import { useRouter } from "next/navigation";
 import useCreatePost from "@/hooks/useCreatePost";
+import { imageUrlToFile } from "@/utils/fileFormatter";
+import useEditPost from "@/hooks/useEditPost";
 
 const schema = yup
   .object({
@@ -40,10 +40,38 @@ const schema = yup
   })
   .required();
 
-const CreatePostForm = () => {
-  const {createPost} = useCreatePost();
+const CreatePostForm = ({ postToEdit = {} }) => {
+  const { _id: editId } = postToEdit;
+  const isEditSession = Boolean(editId);
+  const {
+    title,
+    text,
+    briefText,
+    slug,
+    readingTime,
+    category,
+    coverImage,
+    coverImageUrl: prevPostCoverImageUrl,
+  } = postToEdit;
+  let editValues = {};
+  if (isEditSession) {
+    editValues = {
+      title,
+      text,
+      briefText,
+      slug,
+      readingTime,
+      category: category._id,
+      coverImage,
+    };
+  }
+
+  const { createPost } = useCreatePost();
+  const { editPost } = useEditPost();
   const router = useRouter();
-  const [coverImageUrl, setCoverImageUrl] = useState(null);
+  const [coverImageUrl, setCoverImageUrl] = useState(
+    prevPostCoverImageUrl || null
+  );
   const { categories } = useCategories();
   const {
     register,
@@ -51,27 +79,49 @@ const CreatePostForm = () => {
     setValue,
     handleSubmit,
     reset,
-    control
+    control,
   } = useForm({
     mode: "onTouched",
     resolver: yupResolver(schema),
+    defaultValues: editValues,
   });
 
+  useEffect(() => {
+    if (prevPostCoverImageUrl) {
+      async function fetchMyAPI() {
+        const file = await imageUrlToFile(prevPostCoverImageUrl);
+        setValue("coverImage", file);
+      }
+      fetchMyAPI();
+    }
+  }, []);
 
   const onSubmit = async (data) => {
     const formData = new FormData();
 
-    for(const key in data) {
-      formData.append(key , data[key]);
+    for (const key in data) {
+      formData.append(key, data[key]);
     }
 
-    createPost(formData , {
-      onSuccess:() => {
-        router.push("/profile/posts")
-      }
-    })
-  }
-
+    if (isEditSession) {
+      editPost(
+        { id: editId, data: formData },
+        {
+          onSuccess: () => {
+            reset();
+            router.push("/profile/posts");
+          },
+        }
+      );
+    } else {
+      createPost(formData, {
+        onSuccess: () => {
+          router.push("/profile/posts");
+          reset();
+        },
+      });
+    }
+  };
 
   return (
     <form className="form">
@@ -162,9 +212,11 @@ const CreatePostForm = () => {
         </div>
       )}
 
-      <button type="submit" onClick={handleSubmit(onSubmit)}>تایید</button>
+      <button type="submit" onClick={handleSubmit(onSubmit)}>
+        تایید
+      </button>
     </form>
   );
 };
 
-export default  CreatePostForm;
+export default CreatePostForm;
