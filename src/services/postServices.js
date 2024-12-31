@@ -35,3 +35,7 @@ export const createPostApi = (data) => {
 export const editpostApi = ({id,data}) => {
   return http.patch(`/post/update/${id}` , data).then(({ data }) => data.data);
 };
+
+export const deletePostApi = (id) => {
+  return http.delete(`/post/remove/${id}`).then(({ data }) => data.data);
+};

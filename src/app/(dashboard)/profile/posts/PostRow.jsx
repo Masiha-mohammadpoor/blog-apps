@@ -31,7 +31,7 @@ const PostRow = ({ post, index }) => {
       </td>
       <td>
         <span className="flex gap-x-2">
-        <DeletePost id={_id}/>
+        <DeletePost id={_id} post={post}/>
         <EditPost id={_id}/>
         </span>
       </td>
