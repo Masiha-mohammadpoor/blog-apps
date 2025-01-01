@@ -6,7 +6,7 @@ import Search from "@/ui/Search";
 export default function Layout({ children }) {
   return (
     <main className="container grid grid-cols-12 gap-8 mt-10">
-      <section className="col-span-3 bg-secondary-200 max-h-60">
+      <section className="col-span-3 max-h-60">
         <Suspense fallback={<Spinner />}>
           <CategoryList />
         </Suspense>
