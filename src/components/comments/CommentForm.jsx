@@ -2,7 +2,7 @@
 
 import { createComment } from "@/lib/actions";
 import SpinnerButton from "@/ui/SpinnerButton";
-import { useActionState, useEffect, useState } from "react";
+import { startTransition, useActionState, useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 const initialState = {
@@ -23,15 +23,19 @@ const CommentForm = ({ postId }) => {
     }
   }, [state]);
 
+  const submitHandler = (e) => {
+    e.preventDefault();
+    startTransition(() => {
+      formAction({ formData: text, postId, parentId: null });
+    });
+    setText("");
+  };
 
   return (
     <div>
       <form
-        action={(formData) => {
-         formAction({ formData, postId });
-        }}
         className="flex flex-col justify-start items-start"
-        onSubmit={() => setText("")}
+        onSubmit={submitHandler}
       >
         <textarea
           name="text"

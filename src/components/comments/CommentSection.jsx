@@ -4,11 +4,18 @@ import Comment from "./Comment";
 import CommentForm from "./CommentForm";
 import { useRouter } from "next/navigation";
 import swal from "sweetalert";
-import { useState } from "react";
+import { startTransition, useActionState, useState } from "react";
+import { createComment } from "@/lib/actions";
+
+const initialState = {
+  error: "",
+  message: "",
+};
 
 const CommentSection = ({ post: { comments, _id } }) => {
   const { user } = useAuth();
   const router = useRouter();
+  const [state, formAction] = useActionState(createComment, initialState);
 
   const addNewCommentHandler = (comment) => {
     if (!user) {
@@ -20,7 +27,10 @@ const CommentSection = ({ post: { comments, _id } }) => {
         if (!value) {
           swal("", "لطفا چیزی وارد کنید", "error");
         } else {
-          swal("" , "پاسخ شما ثبت شد" , "success")
+          startTransition(() => {
+            formAction({ formData: value, postId: _id, parentId: comment._id });
+          });
+          swal("", "پاسخ شما ثبت شد", "success");
         }
       });
     }
@@ -28,7 +38,7 @@ const CommentSection = ({ post: { comments, _id } }) => {
   return (
     <section>
       <h1 className="text-lg font-semibold mt-5 mb-3">نظرات</h1>
-      <CommentForm postId={_id}/>
+      <CommentForm postId={_id} />
       <div className="space-y-8 post-comments bg-secondary-0 rounded-xl py-6 px-3 lg:px-6 mt-5">
         {comments.length > 0 ? (
           comments.map((comment) => {

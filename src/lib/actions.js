@@ -5,12 +5,14 @@ import { toStringCookies } from "@/utils/toStringCookies";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-export async function createComment(prevState, { formData, postId }) {
+export async function createComment(prevState, { formData, postId, parentId }) {
   const cookiesStore = await cookies();
   const cookiesString = toStringCookies(cookiesStore);
+
   const commentData = {
-    text: formData.get("text"),
+    text: formData,
     postId,
+    parentId,
   };
 
   try {

@@ -9,6 +9,7 @@ const SpinnerButton = () => {
   return (
     <Button
       disabled={pending}
+      type="submit"
       className="mt-4 flex justify-between items-center gap-x-3"
     >
       تایید
