@@ -24,7 +24,7 @@ const Search = () => {
   };
 
   return (
-    <form className="relative" onSubmit={formSubmit}>
+    <form className="relative w-2/3" onSubmit={formSubmit}>
       <input
         type="text"
         name="search"

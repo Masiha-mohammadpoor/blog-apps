@@ -6,7 +6,7 @@ const CategoryList = async () => {
   const { categories } = await getAllCategories();
 
   return (
-    <section>
+    <section className="pr-3">
       <h1 className="font-semibold text-lg flex items-center gap-x-3 mb-3">
         <HiOutlineSquares2X2 className="w-6 h-6" />
         دسته‌بندی ها

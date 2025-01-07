@@ -7,7 +7,7 @@ const Header = () => {
   const pathname = usePathname();
   const { isLoading, user } = useAuth();
   return (
-    <header className="w-full shadow-lg flex justify-between items-center p-4 px-20">
+    <header className="w-full shadow-lg flex justify-between items-center p-4 md:px-20 px-5">
       <div className="w-24">
         <ul className="w-full flex justify-between items-center">
           <li>
