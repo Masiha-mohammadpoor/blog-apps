@@ -2,7 +2,7 @@ import { getAllCategories } from "@/services/categoryServices";
 import { useQuery } from "@tanstack/react-query";
 
 export function useCategories() {
-  const { data, isLoading } = useQuery({
+  const { data, isPending } = useQuery({
     queryKey: ["categories"],
     queryFn: getAllCategories,
   });
@@ -13,5 +13,5 @@ export function useCategories() {
     label: item.title,
     value: item._id,
   }));
-  return { isLoading, categories };
+  return { isPending, categories , data};
 }

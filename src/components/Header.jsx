@@ -2,12 +2,21 @@
 import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { HiBars3 } from "react-icons/hi2";
+import useLocalStorage from "use-local-storage";
 
 const Header = () => {
   const pathname = usePathname();
   const { isLoading, user } = useAuth();
+  const [openMenu, setOpenMenu] = useLocalStorage("openMenu", false);
+
   return (
     <header className="w-full shadow-lg flex justify-between items-center p-4 md:px-20 px-5">
+      <div className="lg:hidden flex items-center">
+        <button onClick={() => setOpenMenu(true)}>
+          <HiBars3 className="w-7 h-7" />
+        </button>
+      </div>
       <div className="w-24">
         <ul className="w-full flex justify-between items-center">
           <li>
