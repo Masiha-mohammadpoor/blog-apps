@@ -1,5 +1,6 @@
 "use client";
 import { useAuth } from "@/context/authContext";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { HiBars3 } from "react-icons/hi2";
@@ -47,7 +48,9 @@ const Header = () => {
         {isLoading ? (
           ""
         ) : user ? (
-          <Link href="/profile">پروفایل</Link>
+          <Link href="/profile">
+            <Image src="/images/user.jpg" alt="profile" width={40} height={40} className="rounded-full"/>
+          </Link>
         ) : (
           <Link href="/signin">ورود</Link>
         )}
