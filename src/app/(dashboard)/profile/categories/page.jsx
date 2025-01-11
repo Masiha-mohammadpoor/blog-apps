@@ -12,8 +12,8 @@ const Categories = async () => {
           <CreateCategory />
         </div>
       </div>
-      <Suspense fallback={<Spinner/>}>
-        <CategoryTable/>
+      <Suspense fallback={<Spinner />}>
+        <CategoryTable />
       </Suspense>
     </div>
   );
