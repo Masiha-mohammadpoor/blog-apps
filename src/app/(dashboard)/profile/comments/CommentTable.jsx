@@ -3,12 +3,12 @@ import Empty from "@/ui/Empty";
 import Table from "@/ui/Table";
 import { useComments } from "@/hooks/useComments";
 import CommentRow from "./CommentRow";
+import Spinner from "@/ui/Spinner";
 
 const CommentTable = ({query =""}) => {
   const {data , isPending} = useComments();
-  // const { posts } = await getAllPosts(query);
 
-  if(isPending) return "";
+  if(isPending) return <Spinner/>;
   if (!data.comments.length) return <Empty resourceName="نظری" />;
   return (
     <Table>
