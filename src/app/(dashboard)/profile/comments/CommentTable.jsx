@@ -16,11 +16,10 @@ const CommentTable = ({query =""}) => {
         <th>#</th>
         <th>متن‌نظر</th>
         <th>نویسنده</th>
-        <th>تعداد پاسخ ها</th>
         <th>تاریخ ایجاد</th>
         <th>وضعیت</th>
         <th>مشاهده پست</th>
-        {/* <th>عملیات</th> */}
+        <th>عملیات</th>
       </Table.Head>
       <Table.Body>
         {data.comments.map((comment, index) => {

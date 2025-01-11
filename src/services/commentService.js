@@ -10,11 +10,16 @@ export const addComment = (data, cookies) => {
 };
 
 
-export const getAllComments = (cookies) => {
-  return http.get("/comment/list", {
+export const getAllComments = (query="",cookies="") => {
+  return http.get(`comment/list?=${query}`, {
       headers: {
         Cookie: cookies,
       },
     })
     .then(({ data }) => data.data);
 };
+
+export const deleteCommentApi = (id) => {
+  return http.delete(`/comment/remove/${id}`).then(({ data }) => data.data);
+};
+

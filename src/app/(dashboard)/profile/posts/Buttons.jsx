@@ -6,7 +6,6 @@ import Link from "next/link";
 import { FaPlus } from "react-icons/fa";
 import { HiOutlineTrash, HiOutlinePencilSquare } from "react-icons/hi2";
 import useDeletePost from "@/hooks/useDeletePost";
-import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
 
 export const CreatePost = () => {

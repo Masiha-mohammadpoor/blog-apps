@@ -14,7 +14,7 @@ const Posts = async ({searchParams}) => {
   return (
     <div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 text-secondary-700 mb-12 items-center">
-        <h1 className="text-lg font-semibold col-span-1">آخرین پست‌ها</h1>
+        <h1 className="text-lg font-semibold col-span-1">پست‌ها</h1>
         <Search />
         <div className="col-span-1 flex lg:justify-end">
           <CreatePost />
