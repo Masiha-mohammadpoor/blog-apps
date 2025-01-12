@@ -16,7 +16,6 @@ const CategoryRow = ({ category, index }) => {
       <td>
         <span className="flex gap-x-2">
           <DeleteCategory id={_id} category={category} />
-          <EditCategory id={_id} />
         </span>
       </td>
     </Table.Row>

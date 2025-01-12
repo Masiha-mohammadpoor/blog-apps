@@ -42,13 +42,3 @@ export const DeleteCategory = ({ id, category: { title } }) => {
     </ButtonIcon>
   );
 };
-
-export const EditCategory = ({ id }) => {
-  return (
-    <Link href={`/profile/categories/${id}/edit`}>
-      <ButtonIcon variant="primary">
-        <HiOutlinePencilSquare />
-      </ButtonIcon>
-    </Link>
-  );
-};
