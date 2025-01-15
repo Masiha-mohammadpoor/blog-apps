@@ -1,6 +1,11 @@
 "use client";
 
-import { getUserApi, signinUser, signupUser } from "@/services/authServices";
+import {
+  getUserApi,
+  logoutUser,
+  signinUser,
+  signupUser,
+} from "@/services/authServices";
 import { useRouter } from "next/navigation";
 import { createContext, useContext, useEffect, useReducer } from "react";
 import toast from "react-hot-toast";
@@ -37,6 +42,11 @@ const authReducer = (state, action) => {
         user: action.payload,
         isAuthenticated: true,
         isLoading: false,
+      };
+    case "logout":
+      return {
+        user: null,
+        isAuthenticated: false,
       };
     case "user/loaded":
       return {
@@ -81,17 +91,17 @@ const AuthProvider = ({ children }) => {
       toast.error(error);
     }
   };
-  const getUser = async () => {
-    dispatch({ type: "loading" });
+
+  async function logout() {
     try {
-      const { user } = await getUserApi();
-      dispatch({ type: "user/loaded", payload: user });
-    } catch (err) {
-      const error = err?.response?.data?.message;
-      dispatch({ type: "rejected", payload: error });
+      await logoutUser();
+      router.push("/");
+      dispatch({ type: "logout" });
+      toast.success("خارج شدید");
+    } catch (error) {
       toast.error(error);
     }
-  };
+  }
 
   useEffect(() => {
     const getUser = async () => {
@@ -102,15 +112,15 @@ const AuthProvider = ({ children }) => {
       } catch (err) {
         const error = err?.response?.data?.message;
         dispatch({ type: "rejected", payload: error });
-        console.log(error)
+        console.log(error);
       }
     };
     getUser();
-  },[])
+  }, []);
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated, isLoading, signin, signup }}
+      value={{ user, isAuthenticated, isLoading, signin, signup, logout }}
     >
       {children}
     </AuthContext.Provider>

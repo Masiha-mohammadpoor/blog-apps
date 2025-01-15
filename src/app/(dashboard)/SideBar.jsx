@@ -3,19 +3,39 @@
 import { useAuth } from "@/context/authContext";
 import Link from "next/link";
 import SideBarNavs from "./SideBarNavs";
+import swal from "sweetalert";
 import {
   HiOutlineHome,
   HiArrowLeftEndOnRectangle,
   HiMiniXMark,
   HiBars4,
 } from "react-icons/hi2";
-// import { HiArrowLeftOnRectangle } from "react-icons/hi";
 
 function SideBar({ onClose }) {
   const { logout } = useAuth();
 
-  const logoutHandler = async () => {
-    await logout;
+  const logoutUser = async () => {
+    await logout();
+  };
+
+  const logoutHandler = () => {
+    swal({
+      title: "خروج",
+      text: "آیا میخواهید خارج شوید؟",
+      dangerMode: true,
+      buttons: {
+        confirm: "تایید",
+        cancel: "لغو",
+      },
+    }).then((res) => {
+      try {
+        if (res) {
+          logoutUser();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    });
   };
 
   return (

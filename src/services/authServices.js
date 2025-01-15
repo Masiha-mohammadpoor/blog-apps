@@ -20,3 +20,7 @@ export const getAllUsers = (cookies) => {
     })
     .then(({ data }) => data.data);
 };
+
+export const logoutUser = () => {
+  return http.post("/user/logout").then(({ data }) => data.data);
+};
