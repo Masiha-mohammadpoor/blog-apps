@@ -4,6 +4,7 @@ import RHFTextField from "@/ui/RHFTextField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useAuth } from "@/context/authContext";
+import Link from "next/link";
 
 const schema = yup
   .object({
@@ -28,7 +29,7 @@ const Signup = () => {
     await signup(values);
   };
   return (
-    <section className="w-96 mx-auto mt-10">
+    <section className="sm:w-96 w-72 mx-auto mt-10">
       <h1 className="font-semibold text-3xl mb-5 text-primary-600">ثبت نام</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <RHFTextField
@@ -54,6 +55,8 @@ const Signup = () => {
         />
         <button className="w-full btn btn--primary mt-5">ثبت نام</button>
       </form>
+      <Link href="/signin" className="text-center mt-10 text-primary-900">قبلا ثبت‌نام کرده‌اید؟</Link>
+
     </section>
   );
 };

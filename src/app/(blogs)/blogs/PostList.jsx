@@ -7,11 +7,14 @@ import { getAllPosts } from "@/services/postServices";
 import { cookies } from "next/headers";
 import { toStringCookies } from "@/utils/toStringCookies";
 import { toPersianDigits } from "@/utils/toPersianDigits";
+import queryString from "query-string";
+import Pagination from "@/ui/Pagination";
 
-const PostList = async ({ query }) => {
+const PostList = async ({ query , searchParams}) => {
+  const search = queryString.stringify(searchParams);
   const cookieStore = cookies();
   const strCookies = toStringCookies(cookieStore);
-  const { posts } = await getAllPosts(`${query}`, strCookies);
+  const { posts , totalPages} = await getAllPosts(`${query}&${search}`, strCookies);
 
   if (posts.length <= 0)
     return (
@@ -62,6 +65,9 @@ const PostList = async ({ query }) => {
             </article>
           );
         })}
+      </div>
+      <div className="col-span-12 flex justify-center mt-8">
+      <Pagination totalPages={totalPages}/>
       </div>
     </>
   );

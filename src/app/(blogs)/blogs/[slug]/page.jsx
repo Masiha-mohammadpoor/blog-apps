@@ -26,7 +26,7 @@ const SinglePostPage = async ({ params }) => {
   const { post } = await getSinglePost(slug);
 
   return (
-    <div className="container mt-10 px-40">
+    <div className="container mt-10 lg:px-40">
       <h1 className="text-lg font-semibold mb-5">{post.title}</h1>
       <p className="text-secondary-600 mb-5">{post.briefText}</p>
       <p className="text-secondary-600 mb-10">{post.text}</p>
